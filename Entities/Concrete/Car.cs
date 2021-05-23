@@ -8,7 +8,7 @@ namespace Entities.Concrete
     public class Car : IEntity
     {
         public int Id { get; set; }
-        public string Creator { get; set; }
+        public string Creator { get; set; } //gfdkgjdsknfdsnfk
         public DateTime CreateTime { get; set; }
         public string Updater { get; set; }
         public DateTime UpdateTime { get; set; }
