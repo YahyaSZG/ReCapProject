@@ -7,7 +7,7 @@ namespace Entities.Concrete
 {
     public class Car : IEntity
     {
-        public int Id { get; set; } //just for push
+        public int Id { get; set; }
         public string Creator { get; set; }
         public DateTime CreateTime { get; set; }
         public string Updater { get; set; }
