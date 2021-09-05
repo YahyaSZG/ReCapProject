@@ -29,6 +29,12 @@ namespace Business.Concrete
             return new SuccessResult("Ürün ekledi");
         }
 
+        public IResult Delete(Car car)
+        {
+            _carDal.Delete(car);
+            return new SuccessResult("Silme başarılı");
+        }
+
         public IDataResult<List<Car>> GetAll()
         {
             if (DateTime.Now.Hour == 22)
@@ -60,6 +66,12 @@ namespace Business.Concrete
                 return new ErrorDataResult<List<CarDetailDto>>(_carDal.GetCarDetails());
             }
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails());
+        }
+
+        public IResult Update(Car car)
+        {
+            _carDal.Update(car);
+            return new SuccessResult("Güncelleme başarılı");
         }
     }
 }

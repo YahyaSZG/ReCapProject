@@ -10,6 +10,6 @@ namespace Core.Entities
         public string Creator { get; set; }
         public DateTime CreateTime { get; set; }
         public string Updater { get; set; }
-        public DateTime UpdateTime { get; set; }
+        public DateTime? UpdateTime { get; set; }
     }
 }

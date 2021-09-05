@@ -9,15 +9,57 @@ namespace ConsoleUI
     class Program
     {
         static void Main(string[] args)
-        {              
+        {
+            AddRentalTest();
+            //AddCustomerTest();
+            //AddUserTest();
             //BrandManagerTest();
-            CarManagerTest();
+            //CarManagerTest();
+        }
+
+        private static void AddCustomerTest()
+        {
+            CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
+            customerManager.Add(new Customer
+            {
+                Creator = "yahya",
+                CreateTime = DateTime.Now,
+                UserId = 1,
+                CompanyName = "yahya ltd."
+            });
+        }
+
+        private static void AddRentalTest()
+        {
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
+            rentalManager.Add(new Rental
+            {
+                Creator = "yahya",
+                CreateTime = DateTime.Now,
+                CarID = 1,
+                CustomerID = 1,
+                RentDate = DateTime.Now
+            });
+        }
+
+        private static void AddUserTest()
+        {
+            UserManager adduser = new UserManager(new EfUserDal());
+            adduser.Add(new User
+            {
+                CreateTime = DateTime.Now,
+                Creator = "yahyaaas",
+                FirstName = "yahyaaa",
+                LastName = "sezgin",
+                Password = "deneme"
+            });
         }
 
         private static void BrandManagerTest()
         {
             BrandManager brandManager = new BrandManager(new EfBrandDal());
-            foreach (var item in brandManager.GetAll())
+            var result = brandManager.GetAll();
+            foreach (var item in result.Data)
             {
                 Console.WriteLine(item.BrandName);
             }

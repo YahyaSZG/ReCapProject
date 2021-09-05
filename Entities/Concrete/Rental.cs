@@ -5,13 +5,16 @@ using System.Text;
 
 namespace Entities.Concrete
 {
-    public class Color : IEntity
+    public class Rental : IEntity
     {
         public int Id { get; set; }
         public string Creator { get; set; }
         public DateTime CreateTime { get; set; }
         public string Updater { get; set; }
         public DateTime? UpdateTime { get; set; }
-        public string ColorName { get; set; }
+        public int CarID { get; set; }
+        public int CustomerID { get; set; }
+        public DateTime RentDate { get; set; }
+        public DateTime? ReturnDate { get; set; }
     }
 }
