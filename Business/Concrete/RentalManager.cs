@@ -1,7 +1,9 @@
 ﻿using Business.Abstract;
+using Business.ValidationRules.FluentValidation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -18,10 +20,14 @@ namespace Business.Concrete
 
         public IResult Add(Rental rental)
         {
-            if (!GetByCarIdForReturnDate(rental.CarID).Success)
+            var context = new ValidationContext<Rental>(rental);
+            RentalValidator rentalValidator = new RentalValidator();
+            var result = rentalValidator.Validate(context);
+            if (!result.IsValid)
             {
-                return new ErrorResult("Bu araç zaten kiralanmış!");
+                throw new ValidationException(result.Errors);
             }
+
             _rentalDal.Add(rental);
             return new SuccessResult("Kiralama kaydı eklendi");
         }
