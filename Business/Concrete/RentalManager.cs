@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspect.Autofac.Validation;
+using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -17,17 +19,11 @@ namespace Business.Concrete
         {
             _rentalDal = rentalDal;
         }
-
+        
+        [ValidationAspect(typeof(RentalValidator))]
         public IResult Add(Rental rental)
         {
-            var context = new ValidationContext<Rental>(rental);
-            RentalValidator rentalValidator = new RentalValidator();
-            var result = rentalValidator.Validate(context);
-            if (!result.IsValid)
-            {
-                throw new ValidationException(result.Errors);
-            }
-
+            
             _rentalDal.Add(rental);
             return new SuccessResult("Kiralama kaydı eklendi");
         }
