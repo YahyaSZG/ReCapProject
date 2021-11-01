@@ -11,19 +11,30 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class CarImagesController : ControllerBase
     {
-        IUserService _userService;
+        ICarImageService _carImageService;
 
-        public UsersController(IUserService userService)
+        public CarImagesController(ICarImageService carImageService)
         {
-            _userService = userService;
+            _carImageService = carImageService;
         }
 
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
-            var result = _userService.GetAll();
+            var result = _carImageService.GetAll();
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpGet("getimagesbycarid")]
+        public IActionResult GetImagesByCarId(int carId)
+        {
+            var result = _carImageService.GetImagesByCarID(carId);
             if (result.Success)
             {
                 return Ok(result);
@@ -34,7 +45,7 @@ namespace WebAPI.Controllers
         [HttpGet("getbyid")]
         public IActionResult GetById(int Id)
         {
-            var result = _userService.GetById(Id);
+            var result = _carImageService.GetByID(Id);
             if (result.Success)
             {
                 return Ok(result);
@@ -43,9 +54,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("add")]
-        public IActionResult Add(User user)
+        public IActionResult Add(/*[FromForm]*/ CarImage carImage/*, [FromForm] FormFile formFile*/)
         {
-            var result = _userService.Add(user);
+            var result = _carImageService.Add(/*formFile,*/ carImage);
             if (result.Success)
             {
                 return Ok(result);
@@ -54,9 +65,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPut("update")]
-        public IActionResult Update(User user)
+        public IActionResult Update([FromForm] CarImage carImage, [FromForm] FormFile formFile)
         {
-            var result = _userService.Update(user);
+            var result = _carImageService.Update(formFile, carImage);
             if (result.Success)
             {
                 return Ok(result);
@@ -65,14 +76,15 @@ namespace WebAPI.Controllers
         }
 
         [HttpDelete("delete")]
-        public IActionResult Delete(User user)
+        public IActionResult Delete(CarImage carImage)
         {
-            var result = _userService.Delete(user);
+            var result = _carImageService.Delete(carImage);
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
+
     }
 }

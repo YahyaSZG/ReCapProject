@@ -5,16 +5,15 @@ using System.Text;
 
 namespace Entities.Concrete
 {
-    public class User:IEntity
+    public class CarImage : IEntity
     {
         public int Id { get; set; }
         public string Creator { get; set; }
         public DateTime CreateTime { get; set; }
         public string Updater { get; set; }
         public DateTime? UpdateTime { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
+        public int CarID { get; set; }
+        public string ImagePath { get; set; }
+        public DateTime Date { get; set; }
     }
 }

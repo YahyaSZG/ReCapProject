@@ -1,4 +1,5 @@
 ﻿using Business.Concrete;
+using Core.Entities.Concrete;
 using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
@@ -47,11 +48,8 @@ namespace ConsoleUI
             UserManager adduser = new UserManager(new EfUserDal());
             adduser.Add(new User
             {
-                CreateTime = DateTime.Now,
-                Creator = "yahyaaas",
                 FirstName = "yahyaaa",
-                LastName = "sezgin",
-                Password = "deneme"
+                LastName = "sezgin"
             });
         }
 
