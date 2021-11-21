@@ -1,5 +1,13 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspect.Autofac;
+using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspect.Autofac.Caching;
+using Core.Aspect.Autofac.Performance;
+using Core.Aspect.Autofac.Transaction;
+using Core.Aspect.Autofac.Validation;
 using Core.Utilities.Results;
+using Core.Utilities.Utilities;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
@@ -17,10 +25,20 @@ namespace Business.Concrete
             _brandDal = brandDal;
         }
 
+        [SecuredOperation("brand.add,admin")]
+        [ValidationAspect(typeof(BrandValidator))]
         public IResult Add(Brand brand)
         {
             _brandDal.Add(brand);
             return new SuccessResult("Ekleme başarılı");
+        }
+
+        [TransactionScopeAspect]
+        public IResult AddTransactionalTest(Brand brand)
+        {
+            _brandDal.Update(brand);
+            _brandDal.Add(brand);
+            return new SuccessResult(Messages.ProductUpdated);
         }
 
         public IResult Delete(Brand brand)
@@ -29,6 +47,8 @@ namespace Business.Concrete
             return new SuccessResult("Silme başarılı");
         }
 
+        [CacheAspect]
+        [PerformanceAspect(5)]
         public IDataResult<List<Brand>> GetAll()
         {
             return new SuccessDataResult<List<Brand>>(_brandDal.GetAll());

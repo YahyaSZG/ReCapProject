@@ -11,13 +11,13 @@ namespace Business.Constants
         public static string CarAdded = "";
         public static string CarNameInvalid = "";
         public static string CarListed = "";
-
-        public static string UserRegistered { get; internal set; }
-        public static User UserNotFound { get; internal set; }
-        public static User PasswordError { get; internal set; }
-        public static string SuccessfulLogin { get; internal set; }
-        public static string UserAlreadyExists { get; internal set; }
-        public static string AccessTokenCreated { get; internal set; }
-        public static string AuthorizationDenied { get; internal set; }
+        public static string UserRegistered = "";
+        public static string UserNotFound = "Kullanıcı bulunamadı";
+        public static string PasswordError = "Parola doğru değil";
+        public static string SuccessfulLogin = "Giriş başarılı";
+        public static string UserAlreadyExists = "Kullanıcı zaten var";
+        public static string AccessTokenCreated = "Access token oluşturuldu";
+        public static string AuthorizationDenied = "";
+        public static string ProductUpdated = "";
     }
 }
